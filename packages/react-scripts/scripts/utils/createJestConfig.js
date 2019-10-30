@@ -51,11 +51,17 @@ module.exports = (resolve, rootDir, isEjecting) => {
     transformIgnorePatterns: [
       '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$',
       '^.+\\.module\\.(css|sass|scss)$',
+      // trufinol-react-scripts start
+      '^.+\\.module\\.less$',
+      // trufinol-react-scripts end
     ],
     modulePaths: modules.additionalModulePaths || [],
     moduleNameMapper: {
       '^react-native$': 'react-native-web',
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
+      // trufinol-react-scripts start
+      '^.+\\.module\\.less$': 'identity-obj-proxy',
+      // trufinol-react-scripts end
       ...(modules.jestAliases || {}),
     },
     moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(

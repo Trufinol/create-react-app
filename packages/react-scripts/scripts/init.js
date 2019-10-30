@@ -23,6 +23,16 @@ const { defaultBrowsers } = require('react-dev-utils/browsersHelper');
 const os = require('os');
 const verifyTypeScriptSetup = require('./utils/verifyTypeScriptSetup');
 
+// trufinol-react-scripts start
+function trufinolDirections() {
+  console.log(chalk.yellow('trufinol-scripts Directions'));
+  console.log('Inside that directory, you can run several commands:');
+  console.log();
+  console.log(chalk.cyan(`  yarn add --dev less`));
+  console.log('    Adds support for Less.');
+}
+// trufinol-react-scripts end
+
 function isInGitRepository() {
   try {
     execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
@@ -75,7 +85,7 @@ function tryGitInit(appPath) {
   }
 }
 
-module.exports = function(
+module.exports = function (
   appPath,
   appName,
   verbose,
@@ -84,7 +94,9 @@ module.exports = function(
 ) {
   const appPackage = require(path.join(appPath, 'package.json'));
   const useYarn = fs.existsSync(path.join(appPath, 'yarn.lock'));
-
+  // trufinol-react-scripts start
+  trufinolDirections();
+  // trufinol-react-scripts end
   if (!templateName) {
     console.log('');
     console.error(

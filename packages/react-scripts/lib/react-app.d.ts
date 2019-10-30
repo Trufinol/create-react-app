@@ -62,3 +62,10 @@ declare module '*.module.sass' {
   const classes: { readonly [key: string]: string };
   export default classes;
 }
+
+// trufinol-react-scripts start
+declare module '*.module.less' {
+  const classes: { [key: string]: string };
+  export default classes;
+}
+// trufinol-react-scripts end
