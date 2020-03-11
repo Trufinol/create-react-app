@@ -135,6 +135,8 @@ module.exports = function(webpackEnv) {
           loader: require.resolve(preProcessor),
           options: {
             sourceMap: true,
+            javascriptEnabled:
+              preProcessor === 'less-loader' ? true : undefined,
           },
         }
       );
@@ -550,7 +552,6 @@ module.exports = function(webpackEnv) {
                 {
                   importLoaders: 2,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
-                  javascriptEnabled: true,
                 },
                 'less-loader'
               ),
@@ -570,7 +571,6 @@ module.exports = function(webpackEnv) {
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                   modules: true,
                   getLocalIdent: getCSSModuleLocalIdent,
-                  javascriptEnabled: true,
                 },
                 'less-loader'
               ),
