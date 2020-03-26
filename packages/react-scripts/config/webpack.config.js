@@ -129,7 +129,7 @@ module.exports = function(webpackEnv) {
       const preProcessorOptions = { sourceMap: true };
       if (preProcessor === 'less-loader') {
         preProcessorOptions.javascriptEnabled = true;
-        preProcessor.plugins = [
+        preProcessorOptions.plugins = [
           new PostImportPrefixCleanUp({
             wrappers: [
               '[data-antd-theme="pave"]',
