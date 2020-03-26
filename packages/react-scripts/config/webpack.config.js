@@ -7,6 +7,8 @@
  */
 // @remove-on-eject-end
 'use strict';
+// plugin to handle dynamic antd themes https://github.com/atvilelas/antd-theming-engine
+const PostImportPrefixCleanUp = require('./PostImportPrefixCleanUp.js');
 
 const fs = require('fs');
 const path = require('path');
@@ -124,6 +126,19 @@ module.exports = function(webpackEnv) {
       },
     ].filter(Boolean);
     if (preProcessor) {
+      const preProcessorOptions = { sourceMap: true };
+      if (preProcessor === 'less-loader') {
+        preProcessorOptions.javascriptEnabled = true;
+        preProcessor.plugins = [
+          new PostImportPrefixCleanUp({
+            wrappers: [
+              '[data-antd-theme="pave"]',
+              '[data-antd-theme="dyve"]',
+              '[data-antd-theme="default"]',
+            ],
+          }),
+        ];
+      }
       loaders.push(
         {
           loader: require.resolve('resolve-url-loader'),
@@ -133,11 +148,7 @@ module.exports = function(webpackEnv) {
         },
         {
           loader: require.resolve(preProcessor),
-          options: {
-            sourceMap: true,
-            javascriptEnabled:
-              preProcessor === 'less-loader' ? true : undefined,
-          },
+          options: preProcessorOptions,
         }
       );
     }
